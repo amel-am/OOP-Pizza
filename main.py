@@ -5,13 +5,9 @@ from typing import Union, Optional
 class Circle:
     def __init__(self, radius: Optional[Union[int, float]] = None, diameter: Optional[Union[int, float]] = None):
         if radius:
-            if radius < 0:
-                raise ValueError("Radius cannot be zero or negative.")
-            self.__radius = radius
+            self.radius = radius
         elif diameter:
-            if diameter < 0:
-                raise ValueError("Diameter cannot be zero or negative.")
-            self.__radius = diameter
+            self.radius = diameter
         else:
             raise ValueError(
                 "A non zero-negative value has to be provided to either radius or diameter. Make also sure to provide the right type, either int or float.")
@@ -28,7 +24,6 @@ class Circle:
 
     @radius.setter
     def radius(self, radius: Union[int, float]) -> None:
-        # Raises ValueError if radius is either equal to zero or less (negative number).
         if radius <= 0:
             raise ValueError(
                 "The provided value has to be positive and not zero.")
@@ -41,7 +36,6 @@ class Circle:
 
     @diameter.setter
     def diameter(self, diameter: Union[int, float]) -> None:
-        # Raises ValueError if diameter is either equal to zero or less (negative number).
         if diameter <= 0:
             raise ValueError(
                 "The provided value has to be positive and not zero.")
@@ -147,8 +141,10 @@ class PizzaComparison():
                               large_pizza_total_area)
         return result + f"The price difference is ${price_difference:.2f} and the area difference is {area_difference:.2f}cm"
 
-
         # Example usage
+circle = Circle(0, 0)
+
+
 pizza = PizzaComparison(small_pizza_radius=3, large_pizza_radius=4)
 # prints -> "The large pizza offers better value for the price."
 print(pizza.compare_pizzas_price(small_pizza_price=5, large_pizza_price=5))
