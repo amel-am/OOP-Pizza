@@ -73,28 +73,19 @@ class PizzaComparison(Circle):
         elif small_pizza_amount <= 0 or large_pizza_amount <= 0:
             raise ValueError(
                 "The amount of the small pizza or large pizza cannot be equal to zero or a negative number.")
-        small_pizza_amount_price = small_pizza_price * small_pizza_amount
+        small_pizza_total_cost = small_pizza_price * small_pizza_amount
         small_pizza_amount_area = self.__small_pizza_area * small_pizza_amount
-        large_pizza_amount_price = large_pizza_price * large_pizza_amount
-        large_pizza_amount_area = self.__large_pizza_area * large_pizza_amount
-        if large_pizza_amount_price > small_pizza_amount_price:
-            if large_pizza_amount_area > small_pizza_amount_area:
-                price_difference = large_pizza_amount_price - small_pizza_amount_price
-                area_difference = large_pizza_amount_area - small_pizza_amount_area
-                result = "The large pizza is more worth it. "
-            else:
-                price_difference = large_pizza_amount_price - small_pizza_amount_price
-                area_difference = small_pizza_amount_area - large_pizza_amount_area
-                result = "The large pizza is not worth it. "
+        small_pizza_area_cost = small_pizza_total_cost / small_pizza_amount_area
+        large_pizza_amount_area = large_pizza_price * large_pizza_amount
+        large_pizza_total_cost = self.__large_pizza_area * large_pizza_amount
+        large_pizza_area_cost = large_pizza_total_cost / large_pizza_amount_area
+        if large_pizza_area_cost < small_pizza_area_cost:
+            result = "The large pizza offers better value for the price."
         else:
-            if small_pizza_amount_area > large_pizza_amount_area:
-                price_difference = small_pizza_amount_price - large_pizza_amount_price
-                area_difference = small_pizza_amount_area - large_pizza_amount_area
-                result = "The small pizza is definitely worth it. "
-            else:
-                price_difference = small_pizza_amount_price - large_pizza_amount_price
-                area_difference = large_pizza_amount_area - small_pizza_amount_area
-                result = "The small pizza is not worth it. "
+            result = "The small pizza offers better value for the price."
+        price_difference = abs(small_pizza_area_cost - large_pizza_total_cost)
+        area_difference = abs(small_pizza_amount_area -
+                              large_pizza_amount_area)
         return result + f"The price difference is ${price_difference:.2f} and the area difference is {area_difference:.2f}cm"
 
 
