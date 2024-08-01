@@ -7,7 +7,7 @@ class Circle:
         if radius:
             self.radius = radius
         elif diameter:
-            self.radius = diameter
+            self.diameter = diameter
         else:
             raise ValueError(
                 "A non zero-negative value has to be provided to either radius or diameter. Make also sure to provide the right type, either int or float.")
