@@ -5,7 +5,7 @@ from typing import Union, Optional
 class Circle:
     def __init__(self, radius: Optional[Union[int, float]] = None, diameter: Optional[Union[int, float]] = None):
         if radius:
-            self.radius = radius
+            self.__radius = radius
         elif diameter:
             self.diameter = diameter
         else:
@@ -15,36 +15,36 @@ class Circle:
 
     def calculate_area(self) -> float:
         # Calculates the area of the circle and round by 2.
-        return round(self.radius ** 2 * pi, 2)
+        return round(self.__radius ** 2 * pi, 2)
 
     @property
     def radius(self) -> Union[int, float]:
         # Returns value of radius attribute.
-        return self.radius
+        return self.__radius
 
     @radius.setter
     def radius(self, radius: Union[int, float]) -> None:
         if radius <= 0:
             raise ValueError(
                 "The provided value has to be positive and not zero.")
-        self.radius = radius
+        self.__radius = radius
 
     @property
     def diameter(self) -> Union[int, float]:
         # Returns value of diameter property.
-        return self.radius * 2
+        return self.__radius * 2
 
     @diameter.setter
     def diameter(self, diameter: Union[int, float]) -> None:
-        self.radius = diameter / 2
+        self.__radius = diameter / 2
 
     @property
     def area(self) -> Union[int, float]:
-        return round(self.radius ** 2 * pi, 2)
+        return round(self.__radius ** 2 * pi, 2)
 
     @area.setter
     def area(self, area: Union[int, float]) -> None:
-        self.radius = sqrt(area/pi)
+        self.__radius = sqrt(area/pi)
 
 
 class PizzaComparison():
@@ -123,7 +123,6 @@ class PizzaComparison():
             large_pizza_amount  # Area combined with all large pizzas
         large_pizza_area_cost = large_pizza_total_cost / \
             large_pizza_total_area  # Cost per area
-        print(self.__large_pizza_instance.area)
         if large_pizza_area_cost < small_pizza_area_cost:
             result = "The large pizza offers better value for the price."
         elif large_pizza_area_cost > small_pizza_area_cost:
@@ -134,6 +133,7 @@ class PizzaComparison():
         area_difference = abs(small_pizza_total_area -
                               large_pizza_total_area)
         return result + f"The price difference is ${price_difference:.2f} and the area difference is {area_difference:.2f}cm"
+
 
         # Example usage
 pizza = PizzaComparison(small_pizza_radius=3, large_pizza_radius=4)
