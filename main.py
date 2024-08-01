@@ -6,11 +6,11 @@ class Circle:
     def __init__(self, radius: Optional[Union[int, float]] = None, diameter: Optional[Union[int, float]] = None):
         if radius and diameter:
             print("Both values were provided so radius is used!")
-            self.__radius = radius
+            self.radius = radius
         elif radius:
-            self.__radius = radius
+            self.radius = radius
         elif diameter:
-            self.__radius = diameter / 2
+            self.radius = diameter / 2
         else:
             raise ValueError(
                 "A non zero-negative value has to be provided to either radius or diameter. Make also sure to provide the right type, either int or float.")
@@ -35,21 +35,21 @@ class Circle:
     @property
     def diameter(self) -> Union[int, float]:
         # Returns value of diameter property.
-        return self.__radius * 2
+        return self.radius * 2
 
     @diameter.setter
     def diameter(self, diameter: Union[int, float]) -> None:
         self.__validate_positive(diameter)
-        self.__radius = diameter / 2
+        self.radius = diameter / 2
 
     @property
     def area(self) -> Union[int, float]:
-        return round(self.__radius ** 2 * pi, 2)
+        return round(self.radius ** 2 * pi, 2)
 
     @area.setter
     def area(self, area: Union[int, float]) -> None:
         self.__validate_positive(area)
-        self.__radius = sqrt(area/pi)
+        self.radius = sqrt(area/pi)
 
 
 class PizzaComparison():
