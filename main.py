@@ -4,18 +4,23 @@ from typing import Union, Optional
 
 class Circle:
     def __init__(self, radius: Optional[Union[int, float]] = None, diameter: Optional[Union[int, float]] = None):
-        if radius:
+        if radius and diameter:
+            print("Both values were provided so radius is used!")
+            self.__radius = radius
+        elif radius:
             self.__radius = radius
         elif diameter:
-            self.diameter = diameter
+            self.__radius = diameter / 2
         else:
             raise ValueError(
                 "A non zero-negative value has to be provided to either radius or diameter. Make also sure to provide the right type, either int or float.")
         # Initializes area with 0.0. Has to be floating value, because of type checker.
 
-    def calculate_area(self) -> float:
-        # Calculates the area of the circle and round by 2.
-        return round(self.__radius ** 2 * pi, 2)
+    @staticmethod
+    def __validate_positive(value: Union[int, float]) -> float:
+        if value <= 0:
+            raise ValueError("The value must be positive and non-zero.")
+        return float(value)
 
     @property
     def radius(self) -> Union[int, float]:
@@ -24,9 +29,7 @@ class Circle:
 
     @radius.setter
     def radius(self, radius: Union[int, float]) -> None:
-        if radius <= 0:
-            raise ValueError(
-                "The provided value has to be positive and not zero.")
+        self.__validate_positive(radius)
         self.__radius = radius
 
     @property
@@ -36,6 +39,7 @@ class Circle:
 
     @diameter.setter
     def diameter(self, diameter: Union[int, float]) -> None:
+        self.__validate_positive(diameter)
         self.__radius = diameter / 2
 
     @property
@@ -44,6 +48,7 @@ class Circle:
 
     @area.setter
     def area(self, area: Union[int, float]) -> None:
+        self.__validate_positive(area)
         self.__radius = sqrt(area/pi)
 
 
@@ -80,7 +85,7 @@ class PizzaComparison():
         self.__small_pizza_instance.area = area
 
     @property
-    def large_pizza_radius(self) -> Optional[Union[int, float]]:
+    def large_pizza_radius(self) -> Union[int, float]:
         return self.__large_pizza_instance.radius
 
     @large_pizza_radius.setter
@@ -133,7 +138,6 @@ class PizzaComparison():
         area_difference = abs(small_pizza_total_area -
                               large_pizza_total_area)
         return result + f"The price difference is ${price_difference:.2f} and the area difference is {area_difference:.2f}cm"
-
 
         # Example usage
 pizza = PizzaComparison(small_pizza_radius=3, large_pizza_radius=4)
