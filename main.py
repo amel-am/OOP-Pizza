@@ -15,42 +15,36 @@ class Circle:
 
     def calculate_area(self) -> float:
         # Calculates the area of the circle and round by 2.
-        return round(self.__radius ** 2 * pi, 2)
+        return round(self.radius ** 2 * pi, 2)
 
     @property
-    def radius(self) -> Optional[Union[int, float]]:
+    def radius(self) -> Union[int, float]:
         # Returns value of radius attribute.
-        return self.__radius
+        return self.radius
 
     @radius.setter
     def radius(self, radius: Union[int, float]) -> None:
         if radius <= 0:
             raise ValueError(
                 "The provided value has to be positive and not zero.")
-        self.__radius = radius
+        self.radius = radius
 
     @property
-    def diameter(self) -> Optional[Union[int, float]]:
+    def diameter(self) -> Union[int, float]:
         # Returns value of diameter property.
-        return self.__radius * 2
+        return self.radius * 2
 
     @diameter.setter
     def diameter(self, diameter: Union[int, float]) -> None:
-        if diameter <= 0:
-            raise ValueError(
-                "The provided value has to be positive and not zero.")
-        self.__radius = self.__radius / 2
+        self.radius = diameter / 2
 
     @property
     def area(self) -> Union[int, float]:
-        return round(self.__radius ** 2 * pi, 2)
+        return round(self.radius ** 2 * pi, 2)
 
     @area.setter
     def area(self, area: Union[int, float]) -> None:
-        if area <= 0:
-            raise ValueError(
-                "The area of a circle cannot be zero or negative.")
-        self.__radius = sqrt(area/pi)
+        self.radius = sqrt(area/pi)
 
 
 class PizzaComparison():
@@ -142,9 +136,6 @@ class PizzaComparison():
         return result + f"The price difference is ${price_difference:.2f} and the area difference is {area_difference:.2f}cm"
 
         # Example usage
-circle = Circle(0, 0)
-
-
 pizza = PizzaComparison(small_pizza_radius=3, large_pizza_radius=4)
 # prints -> "The large pizza offers better value for the price."
 print(pizza.compare_pizzas_price(small_pizza_price=5, large_pizza_price=5))
