@@ -100,8 +100,7 @@ class PizzaComparison():
         if area <= 0:
             raise ValueError(
                 "The area of the small Pizza cannot be zero or negative.")
-        else:
-            self.__small_pizza_area = area
+        self.__small_pizza_area = area
 
     @property
     def large_pizza_radius(self) -> Optional[Union[int, float]]:
@@ -130,8 +129,7 @@ class PizzaComparison():
         if area <= 0:
             raise ValueError(
                 "The area of the small Pizza cannot be zero or negative.")
-        else:
-            self.__large_pizza_area = area
+        self.__large_pizza_area = area
 
     def compare_pizzas_price(self, small_pizza_price: Union[int, float],  large_pizza_price: Union[int, float],
                              small_pizza_amount: Union[int, float] = 1, large_pizza_amount: Union[int, float] = 1) -> str:
